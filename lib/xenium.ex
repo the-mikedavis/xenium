@@ -7,12 +7,6 @@ defmodule Xenium do
   Ask!
   
   Post the XML-RPC server url with a method name and optional parameters.
-
-  ## Examples
-
-      iex> Xenium.ask! xml-rpc-url, "method.name", [:param1, :param2]
-      "response"
-
   """
   def ask!(url, method_name, params \\ []) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}

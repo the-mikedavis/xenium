@@ -9,7 +9,8 @@ defmodule Xenium.MixProject do
       source_url: "https://github.com/the-mikedavis/xenium",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      escript: escript_config()
     ]
   end
 
@@ -26,4 +27,9 @@ defmodule Xenium.MixProject do
       { :ex_doc, "~> 0.16", only: :dev, runtime: false }
     ]
   end
+
+  defp escript_config do
+    [ main_module: Xenium.CLI ]
+  end
+
 end
