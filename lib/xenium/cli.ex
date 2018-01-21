@@ -46,7 +46,7 @@ defmodule Xenium.CLI do
   end
 
   def process({ url, method, params }) do
-    Xenium.ask!(url, method, params) |> IO.inspect
+    Xenium.call!(url, method, params) |> IO.inspect
   end
 
 end

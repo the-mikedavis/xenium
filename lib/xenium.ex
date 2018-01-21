@@ -4,11 +4,11 @@ defmodule Xenium do
   """
 
   @doc """
-  Ask!
+  Call!
   
   Post the XML-RPC server url with a method name and optional parameters.
   """
-  def ask!(url, method_name, params \\ []) do
+  def call!(url, method_name, params \\ []) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}
     |> XMLRPC.encode!
     |> (&HTTPoison.post!(url, &1)).()
