@@ -5,8 +5,7 @@ defmodule Xenium.CLI do
   """
 
   def main(argv) do
-    IO.inspect argv
-    parse_args(argv)
+    argv |> parse_args |> process
   end
 
 
@@ -28,6 +27,26 @@ defmodule Xenium.CLI do
 
       _ -> :help
     end
+  end
+
+  @doc """
+  Process.
+
+  React to the command line arguments.
+
+  Print the help dialog if help is needed.
+
+  Call the client function otherwise.
+  """
+  def process(:help) do
+    IO.puts """
+    usage:  xenium <url> <method-name> [ <param1> <param2> <param3> ]
+    """
+    System.halt(0)
+  end
+
+  def process({ url, method, params }) do
+    Xenium.ask!(url, method, params) |> IO.inspect
   end
 
 end
