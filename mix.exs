@@ -22,7 +22,8 @@ defmodule Xenium.MixProject do
   defp deps do
     [
       { :httpoison, "~> 1.0" },
-      { :xmlrpc, "~> 1.1" }
+      { :xmlrpc, "~> 1.1" },
+      { :ex_doc, "~> 0.16", only: :dev, runtime: false }
     ]
   end
 end
