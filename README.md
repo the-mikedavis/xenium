@@ -5,12 +5,12 @@ A simple client toolkit for making XML-RCP calls and reading responses.
 XML-R..P... _what_?
 
 XML-RPC is just regular XML that fits a certain standardized spec. It's for
-issuing _r_emote _p_rocedure _c_alls using HTTP. RPC allows the client to send
+issuing **r**emote **p**rocedure **c**alls using HTTP. RPC allows the client to send
 a request to a server which will execute a command based on the request and
 any other parameters in the call. Along the same line is JSON-RPC. The main
 idea is that the server and client can be written in any language.
 
-Xiny... _what_?
+Xeeny... _what_?
 
 A _xenium_, from Greek, is a gift for strangers and travellers like a banquet
 or smaller meal.
