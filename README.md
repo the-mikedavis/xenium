@@ -35,15 +35,29 @@ this repo and then:
 def deps do
   [
     { :xenium, path: "path/to/top-level/dir/of/repo" }
-    # example
+    # example if you cloned into ~
     # { :xenium, path: "~/xenium" }
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/xenium](https://hexdocs.pm/xenium).
+## Usage
 
-Don't expect that any time soon. The source files should be short and neat
-enough to grok it.
+There's only one function at the moment. `call!` just calls the server. Here's
+an example that interacts with ROS (see 
+[ROS documentation](http://wiki.ros.org/ROS/Technical%20Overview)):
+
+```elixir
+iex> url = System.get_env("ROS_MASTER_URI")
+http://localhost:11311
+iex> Xenium.ask! url, "getSystemState", ["/"]
+[1, 'current system state', [[['/rosout_agg', ['/rosout']]], [['/time', ['/rosout']], ['/rosout', ['/rosout']], ['/clock', ['/rosout']]], [['/rosout/set_logger_level', ['/rosout']], ['/rosout/get_loggers', ['/rosout']]]]]
+```
+
+## Documentation
+
+Documentation is done by ExDocs. When it's live, it'll be
+[here](http://hexdocs.pm/xenium).
+
+In the meantime, ExDocs is a dev dep, so just go to the top-level dir and run
+`mix docs` and then `open docs/index.html`.
