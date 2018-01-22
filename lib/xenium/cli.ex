@@ -1,7 +1,7 @@
 defmodule Xenium.CLI do
 
   @moduledoc """
-  Handle command line parsing for use as a local executable.
+  Handle command line operations for use as a local executable.
   """
 
   @doc """

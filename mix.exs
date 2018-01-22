@@ -1,6 +1,11 @@
 defmodule Xenium.MixProject do
   use Mix.Project
 
+  @description """
+    A client interface for XML-RPC. Makes XML-RPC methods accessible with a
+    single function invocation.
+  """
+
   def project do
     [
       app: :xenium,
@@ -9,7 +14,7 @@ defmodule Xenium.MixProject do
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
       deps: deps(),
-      description: description(),
+      description: @description,
       package: package(),
       escript: escript_config(),
       name: "Xenium",
@@ -31,17 +36,13 @@ defmodule Xenium.MixProject do
     ]
   end
 
-  defp description do
-    """
-    A client interface for XML-RPC. Makes XML-RPC methods accessible with a
-    single function invocation.
-    """
-  end
-
   defp package do
-    files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
-    maintainers: ["Michael Davis"],
-    links: %{"GitHub" => "https://github.com/the-mikedavis/xenium"}
+    [
+      #files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Michael Davis"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/the-mikedavis/xenium"}
+    ]
   end
 
   defp escript_config do
