@@ -10,6 +10,13 @@ defmodule Xenium.MixProject do
       elixir: "~> 1.0",
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
+      test_coverage: [ tool: ExCoveralls ],
+      preferred_cli_env: [
+        "coveralls": :test,
+        "coveralls.details": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+      ],
       deps: deps(),
       description: @description,
       package: package(),
@@ -29,7 +36,8 @@ defmodule Xenium.MixProject do
     [
       { :httpoison, "~> 1.0" },
       { :xmlrpc, "~> 1.1" },
-      { :ex_doc, "~> 0.16", only: :dev, runtime: false }
+      { :ex_doc, "~> 0.16", only: :dev, runtime: false },
+      { :excoveralls, "~> 0.8", only: :test }
     ]
   end
 
