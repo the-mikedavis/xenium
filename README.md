@@ -1,6 +1,10 @@
 # Xenium
 
 A simple client toolkit for making XML-RCP calls and reading responses.
+The current [XML-RPC](https://github.com/ewildgoose/elixir-xml_rpc)
+has a bit of a learning curve. Chances are if you're using XML-RPC, you just
+want to get stuff done now. Xenium allows you to skip all the technicals of
+XML-RPC and HTTP and get to getting stuff done.
 
 XML-R..P... _what_?
 
@@ -43,7 +47,7 @@ end
 
 ## Usage
 
-There's only one function at the moment. `call!` just calls the server. Here's
+There are two functions at the moment. `call!` just calls the server. Here's
 an example that interacts with ROS (see 
 [ROS documentation](http://wiki.ros.org/ROS/Technical%20Overview)):
 
@@ -53,6 +57,11 @@ http://localhost:11311
 iex> Xenium.ask! url, "getSystemState", ["/"]
 [1, 'current system state', [[['/rosout_agg', ['/rosout']]], [['/time', ['/rosout']], ['/rosout', ['/rosout']], ['/clock', ['/rosout']]], [['/rosout/set_logger_level', ['/rosout']], ['/rosout/get_loggers', ['/rosout']]]]]
 ```
+
+`call` makes the same call, but allows you to inspect failures. It returns a
+tuple `{ :ok, response }` if it's successful and `{ :error, error }` on error.
+The errors are carried over from the HTTPoison and XML-RPC libraries, so playing
+around in iex is the best environment for the `call` method.
 
 ## Documentation
 

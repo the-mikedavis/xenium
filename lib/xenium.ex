@@ -13,6 +13,7 @@ defmodule Xenium do
   error tuple contains either the error response from HTTPoison or the
   XMLRPC library.
   """
+  @spec call(binary, binary, list) :: { :ok, any } | { :error, any }
   def call(url, method_name, params \\ []) do
     # safely pipe the results of each
     encode(method_name, params)
@@ -50,6 +51,7 @@ defmodule Xenium do
   The functions used in the pipeline are `encode!` `post!` and `decode!`,
   which all raise exceptions on failure.
   """
+  @spec call!(binary, binary, list) :: any
   def call!(url, method_name, params \\ []) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}
     |> XMLRPC.encode!
