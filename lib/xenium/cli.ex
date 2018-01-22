@@ -18,7 +18,7 @@ defmodule Xenium.CLI do
   Parse command line arguments.
 
   `argv` can be `-h` or `--help`, which returns `:help`.
-  Otherwise, it tries to parse out the url, method name, and parameters.
+  Otherwise, it tries to parse out the URL, method name, and parameters.
 
   Returns a tuple of `{ url, method, params }`, or `:help`.
   """
@@ -44,7 +44,7 @@ defmodule Xenium.CLI do
   """
   def process(:help) do
     IO.puts """
-    usage:  xenium <url> <method-name> [ <param1> <param2> <param3> ]
+    usage:  xenium <URL> <method-name> [ <param1> <param2> <param3> ]
     """
     System.halt(0)
   end

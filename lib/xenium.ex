@@ -7,11 +7,21 @@ defmodule Xenium do
   """
 
   @doc """
-  Post the XML-RPC server url with a method name and optional parameters.
+  Post the XML-RPC server URL with a method name and optional parameters.
 
   Returns a tuple of `{ :ok, response }` or `{ :error, message }`, where the
   error tuple contains either the error response from HTTPoison or the
   XMLRPC library.
+
+  ## Examples
+  
+      Xenium.call "http://localhost:11311", "getSystemState", ["/"]
+      #=> { :ok, [1, "current state", ... ] }
+      Xenium.call "http://lclhst:11311", "getSystemState", ["/"]
+      #=> { :error, %HTTPoison.Error{id: nil, reason: :nxdomain} }
+      Xenium.call "http://localhost:11311", "unsupportedMethod", ["/"]
+      #=> { :error, %XMLRPC.Fault{fault_code: 1,
+      #     fault_string: "<type 'exceptions.Exce..."} }
   """
   @spec call(binary, binary, list) :: { :ok, any } | { :error, any }
   def call(url, method_name, params \\ []) do
@@ -31,8 +41,7 @@ defmodule Xenium do
     try do
       HTTPoison.post(url, body)
     rescue
-      CaseClauseError -> { :error, "HTTPoison error. " <>
-        "Probably an invalid URL." }
+      CaseClauseError -> {:error, "HTTPoison error. " <> "Probably a nil URL."}
     end
   end
   defp post(_url, error), do: error
@@ -45,11 +54,16 @@ defmodule Xenium do
   defp get_resp(error), do: error
 
   @doc """
-  Post the XML-RPC server url with a method name and optional parameters,
+  Post the XML-RPC server URL with a method name and optional parameters,
   raising an exception on failure.
 
   The functions used in the pipeline are `encode!` `post!` and `decode!`,
   which all raise exceptions on failure.
+
+  ## Examples
+
+      Xenium.call! "http://localhost:11311", "getSystemState", ["/"]
+      #=> [1, "current state", ... ]
   """
   @spec call!(binary, binary, list) :: any
   def call!(url, method_name, params \\ []) do
