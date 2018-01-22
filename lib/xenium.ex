@@ -11,7 +11,7 @@ defmodule Xenium do
 
   Returns a tuple of `{ :ok, response }` or `{ :error, message }`, where the
   error tuple contains either the error response from HTTPoison or the
-  XMLRPC library.
+  XML-RPC library.
 
   ## Examples
   

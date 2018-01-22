@@ -7,7 +7,7 @@ defmodule Xenium.CLI do
   @doc """
   Entrypoint for the app if compiled into an executable.
 
-  Pipe the argument vector through `parse_args` and `process`
+  Pipe the argument vector through `parse_args/1` and `process/1`
   """
   def main(argv) do
     argv |> parse_args |> process
