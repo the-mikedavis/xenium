@@ -21,8 +21,7 @@ or smaller meal.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `xenium` to your list of dependencies in `mix.exs`:
+Add `xenium` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -32,8 +31,7 @@ def deps do
 end
 ```
 
-Currently, this isn't on hex. (I'm too hip and cool for that.) You can clone
-this repo and then:
+If you prefer to do it all in-house, you can do this:
 
 ```elixir
 def deps do
@@ -65,8 +63,5 @@ around in iex is the best environment for the `call` method.
 
 ## Documentation
 
-Documentation is done by ExDocs. When it's live, it'll be
-[here](http://hexdocs.pm/xenium).
-
-In the meantime, ExDocs is a dev dep, so just go to the top-level dir and run
-`mix docs` and then `open docs/index.html`.
+Documentation is done by ExDocs. It's now live. Check out the official docs at
+[hexdocs](http://hexdocs.pm/xenium).

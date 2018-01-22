@@ -1,10 +1,7 @@
 defmodule Xenium.MixProject do
   use Mix.Project
 
-  @description """
-    A client interface for XML-RPC. Makes XML-RPC methods accessible with a
-    single function invocation.
-  """
+  @description "A simple client interface for XML-RPC."
 
   def project do
     [
