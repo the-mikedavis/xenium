@@ -12,7 +12,8 @@ XML-RPC is just regular XML that fits a certain standardized spec. It's for
 issuing **r**emote **p**rocedure **c**alls using HTTP. RPC allows the client to send
 a request to a server which will execute a command based on the request and
 any other parameters in the call. Along the same line is JSON-RPC. The main
-idea is that the server and client can be written in any language.
+idea is that the server and client can be written in any language, independent
+of eachother.
 
 Xeeny... _what_?
 
@@ -52,7 +53,7 @@ an example that interacts with ROS (see
 ```elixir
 iex> url = System.get_env("ROS_MASTER_URI")
 http://localhost:11311
-iex> Xenium.ask! url, "getSystemState", ["/"]
+iex> Xenium.call! url, "getSystemState", ["/"]
 [1, 'current system state', [[['/rosout_agg', ['/rosout']]], [['/time', ['/rosout']], ['/rosout', ['/rosout']], ['/clock', ['/rosout']]], [['/rosout/set_logger_level', ['/rosout']], ['/rosout/get_loggers', ['/rosout']]]]]
 ```
 
