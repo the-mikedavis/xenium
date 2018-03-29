@@ -14,7 +14,7 @@ defmodule Xenium do
   XML-RPC library.
 
   ## Examples
-  
+
       Xenium.call "http://localhost:11311", "getSystemState", ["/"]
       #=> { :ok, [1, "current state", ... ] }
       Xenium.call "http://lclhst:11311", "getSystemState", ["/"]
@@ -27,7 +27,7 @@ defmodule Xenium do
   def call(url, method_name, params \\ []) do
     # safely pipe the results of each
     encode(method_name, params)
-    |> (&post(url, &1)).()
+    |> post(url)
     |> decode
     |> get_resp
   end
@@ -37,11 +37,11 @@ defmodule Xenium do
     |> XMLRPC.encode
   end
 
-  defp post(url, { :ok, body }) do
+  defp post({ :ok, body }, url) do
     try do
       HTTPoison.post(url, body)
     rescue
-      CaseClauseError -> {:error, "HTTPoison error. " <> "Probably a nil URL."}
+      CaseClauseError -> {:error, "HTTPoison error. Probably a nil URL."}
     end
   end
   defp post(_url, error), do: error
