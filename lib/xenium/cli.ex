@@ -1,5 +1,4 @@
 defmodule Xenium.CLI do
-
   @moduledoc """
   Handle command line operations for use as a local executable.
   """
@@ -13,7 +12,6 @@ defmodule Xenium.CLI do
     argv |> parse_args |> process
   end
 
-
   @doc """
   Parse command line arguments.
 
@@ -23,14 +21,16 @@ defmodule Xenium.CLI do
   Returns a tuple of `{ url, method, params }`, or `:help`.
   """
   def parse_args(argv) do
-    parse = OptionParser.parse(argv, switches: [ help: :boolean ],
-                                     aliases:  [ h:    :help    ])
+    parse =
+      OptionParser.parse(argv,
+        switches: [help: :boolean],
+        aliases: [h: :help]
+      )
 
     case parse do
-      { [ help: true ], _, _ } -> :help
-        # params will always be a list, [] default
-      { _, [ url, method | params ], _ } -> { url, method, params }
-
+      {[help: true], _, _} -> :help
+      # params will always be a list, [] default
+      {_, [url, method | params], _} -> {url, method, params}
       _ -> :help
     end
   end
@@ -43,14 +43,14 @@ defmodule Xenium.CLI do
   params is a list.
   """
   def process(:help) do
-    IO.puts """
+    IO.puts("""
     usage:  xenium <URL> <method-name> [ <param1> <param2> <param3> ]
-    """
+    """)
+
     System.halt(0)
   end
 
-  def process({ url, method, params }) do
-    Xenium.call!(url, method, params) |> IO.inspect
+  def process({url, method, params}) do
+    Xenium.call!(url, method, params) |> IO.inspect()
   end
-
 end

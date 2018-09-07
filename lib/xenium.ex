@@ -25,7 +25,7 @@ defmodule Xenium do
       #=> { :error, %XMLRPC.Fault{fault_code: 1,
       #     fault_string: "<type 'exceptions.Exce..."} }
   """
-  @spec call(binary, binary, list) :: { :ok, any } | { :error, any }
+  @spec call(binary, binary, list) :: {:ok, any} | {:error, any}
   def call(url, method_name, params \\ []) do
     # safely pipe the results of each
     encode(method_name, params)
@@ -36,23 +36,24 @@ defmodule Xenium do
 
   defp encode(method_name, params) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}
-    |> XMLRPC.encode
+    |> XMLRPC.encode()
   end
 
-  defp post({ :ok, body }, url) do
+  defp post({:ok, body}, url) do
     try do
       HTTPoison.post(url, body, @xml_headers)
     rescue
       CaseClauseError -> {:error, "HTTPoison error. Probably a nil URL."}
     end
   end
+
   defp post(_url, error), do: error
 
-  defp decode({ :ok, %{ body: body } }), do: XMLRPC.decode(body)
+  defp decode({:ok, %{body: body}}), do: XMLRPC.decode(body)
   defp decode(error), do: error
 
-  defp get_resp({ :ok, error = %XMLRPC.Fault{} }), do: { :error, error }
-  defp get_resp({ :ok, %{ param: resp } }), do: resp
+  defp get_resp({:ok, error = %XMLRPC.Fault{}}), do: {:error, error}
+  defp get_resp({:ok, %{param: resp}}), do: resp
   defp get_resp(error), do: error
 
   @doc """
@@ -70,11 +71,10 @@ defmodule Xenium do
   @spec call!(binary, binary, list) :: any
   def call!(url, method_name, params \\ []) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}
-    |> XMLRPC.encode!
+    |> XMLRPC.encode!()
     |> (&HTTPoison.post!(url, &1, @xml_headers)).()
     |> Map.get(:body)
-    |> XMLRPC.decode!
+    |> XMLRPC.decode!()
     |> Map.get(:param)
   end
-
 end
