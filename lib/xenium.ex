@@ -6,6 +6,8 @@ defmodule Xenium do
   libraries so you can get stuff done.
   """
 
+  @xml_headers [{"Content-Type", "text/xml"}]
+
   @doc """
   Post the XML-RPC server URL with a method name and optional parameters.
 
@@ -39,7 +41,7 @@ defmodule Xenium do
 
   defp post({ :ok, body }, url) do
     try do
-      HTTPoison.post(url, body)
+      HTTPoison.post(url, body, @xml_headers)
     rescue
       CaseClauseError -> {:error, "HTTPoison error. Probably a nil URL."}
     end
@@ -69,7 +71,7 @@ defmodule Xenium do
   def call!(url, method_name, params \\ []) do
     %XMLRPC.MethodCall{method_name: method_name, params: params}
     |> XMLRPC.encode!
-    |> (&HTTPoison.post!(url, &1)).()
+    |> (&HTTPoison.post!(url, &1, @xml_headers)).()
     |> Map.get(:body)
     |> XMLRPC.decode!
     |> Map.get(:param)
